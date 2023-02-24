@@ -69,3 +69,8 @@ img {
   border-radius: 4px;
   border-top: 100px;
 }
+
+.title {
+  background: url("/img/bandeira.jpg");
+  margin-bottom: 30px;
+}
