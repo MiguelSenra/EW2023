@@ -11,7 +11,6 @@ var myServer = http.createServer(function (req, res) {
   //GET  // Post --enviar info para servidor // Put-- alteração de dados no servidor
 
   if (pedido == "/") {
-    console.log("ola");
     fs.readFile("index.html", function (err, data) {
       res.writeHead(200, { "Content-Type": "text/html;charset=utf-8" });
       if (err) {
@@ -22,7 +21,6 @@ var myServer = http.createServer(function (req, res) {
       res.end();
     });
   } else {
-    console.log("ole");
     fs.readFile(pedido.substring(1) + ".html", function (err, data) {
       res.writeHead(200, { "Content-Type": "text/html;charset=utf-8" });
       if (err) {

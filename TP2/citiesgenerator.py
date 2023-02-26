@@ -64,7 +64,7 @@ for key in cidades:
         pagHTML += f"""
             <tr>
                 <td>
-                    <b>Destino:</b> <a href="{dest_id}">{nome}</a>  
+                    <b>Destino:</b> <a href="/html_files{dest_id}">{nome}</a>  
                 </td>
                 <td>
                     <b> Distância:</b> {dist} km
@@ -77,6 +77,6 @@ for key in cidades:
         </body>
     </html>
     """
-    file = open(key+".html", "w")
+    file = open("html_files/"+key+".html", "w")
     file.write(pagHTML)
     file.close()
