@@ -32,7 +32,7 @@ for cidade in cidades:
         """
 
     pagHTML += f""" 
-       <p> <a href="html_files/{cidade['id']}"> {cidade["nome"]} </a></p>
+       <p> <a href="{cidade['id']}"> {cidade["nome"]} </a></p>
     """
 
 
