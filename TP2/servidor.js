@@ -11,7 +11,7 @@ var myServer = http.createServer(function (req, res) {
   //GET  // Post --enviar info para servidor // Put-- alteração de dados no servidor
 
   if (pedido == "/") {
-    fs.readFile("index.html", function (err, data) {
+    fs.readFile("html_files/index.html", function (err, data) {
       res.writeHead(200, { "Content-Type": "text/html;charset=utf-8" });
       if (err) {
         res.write("Erro: na leitura do ficheiro:: " + err);
@@ -21,15 +21,18 @@ var myServer = http.createServer(function (req, res) {
       res.end();
     });
   } else {
-    fs.readFile(pedido.substring(1) + ".html", function (err, data) {
-      res.writeHead(200, { "Content-Type": "text/html;charset=utf-8" });
-      if (err) {
-        res.write("Erro: na leitura do ficheiro:: " + err);
-      } else {
-        res.write(data);
+    fs.readFile(
+      "html_files/" + pedido.substring(1) + ".html",
+      function (err, data) {
+        res.writeHead(200, { "Content-Type": "text/html;charset=utf-8" });
+        if (err) {
+          res.write("Erro: na leitura do ficheiro:: " + err);
+        } else {
+          res.write(data);
+        }
+        res.end();
       }
-      res.end();
-    });
+    );
   }
 }); //DELETE -- apagar info
 

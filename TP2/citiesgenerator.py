@@ -77,6 +77,6 @@ for key in cidades:
         </body>
     </html>
     """
-    file = open(key+".html", "w")
+    file = open("html_files/"+key+".html", "w")
     file.write(pagHTML)
     file.close()
