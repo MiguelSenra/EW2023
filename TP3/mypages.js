@@ -41,8 +41,9 @@ exports.genMainPage = function (lista, data) {
 
   pagHTML += `
             </table>
+            <p><a href="/">Voltar atrás</a></p>
             </div>
-            <footer class="w3-container w3-blue">
+            <footer class="w3-container w3-purple">
         <adress>Generated in EngWeb2023 ${data}</adress>
     </footer>
     </div>
@@ -67,21 +68,31 @@ exports.genPersonPage = function (p, d) {
             <h1>${p.nome} </h1>
         </header>
     <div class=container>
-    <p>idade:${p.idade}</p>
-    <p>sexo:${p.sexo}</p>
-    <p>morada:${p.morada.cidade},${p.morada.distrito}</p>
-    <p>BI:${p.BI}</p>
-    <p>profissao:${p.profissao}</p>
-    <p>partido_Politico:${p.partido_politico}</p>
-    <p>religiao:${p.religiao}</p>
-    <p>desportos:${p.desportos}</p>
-    <p>animais:${p.animais}</p>
-    <p>figura_publica_pt:${p.figura_publica_pt}</p>
-    <p>marca_carro:${p.marca_carro}</p>
-    <p>destinos_favoritos:${p.destinos_favoritos}</p>
-    <p>atributos:${p.atributos}</p>
+    <ul class="w3-ul w3-card-4">
+    <li><b>Idade : </b>${p.idade}</li>
+    <li><b>Sexo : </b>${p.sexo}</li>
+    <li><b>Morada : </b>${p.morada.cidade},${p.morada.distrito}</li>
+    <li><b>BI : </b>${p.BI}</li>
+    <li><b>Profissao : </b>${p.profissao}</li>
+    <li><b>Partido Politico : </b>${p.partido_politico.party_abbr} : ${p.partido_politico.party_name}</li>
+    <li><b>Religiao : </b>${p.religiao}</li>
+    <li><b>Desportos : </b>${p.desportos}</li>
+    <li><b>Animais : </b>${p.animais}</li>
+    <li><b>Figura Pública : </b>${p.figura_publica_pt}</li>
+    <li><b>marca_carro : </b>${p.marca_carro}</li>
+    <li><b>destinos_favoritos : </b>${p.destinos_favoritos}</li>
+    <li><b>atributos : </b>
+    `;
+  for (const key of Object.keys(p.atributos)) {
+    if (p.atributos[key] == true) pagHTML += `${key}, `;
+  }
+
+  pagHTML += `</li>
+    <li><b>Comida Favorita</b>: ${p.atributos["comida_favorita"]}</li>
+    </ul>
+    <p><a href="/">Voltar atrás</a></p>
     </div>
-    <footer class="w3-container w3-blue">
+    <footer class="w3-container w3-purple">
         <adress>Generated in EngWeb2023 ${d}</adress>
     </footer>
     </div>
@@ -100,6 +111,9 @@ exports.genDitributionSexpage = function (data, d) {
       dist[data[i].sexo]++;
     }
   }
+
+  var list = Object.entries(dist).sort(([, a], [, b]) => b - a);
+
   var htmlpage = `
         <!DOCTYPE html>  
         <html>
@@ -122,19 +136,20 @@ exports.genDitributionSexpage = function (data, d) {
                 </tr>
     `;
 
-  for (const key of Object.keys(dist)) {
+  for (const elem of list) {
     htmlpage += `
         <tr>
-        <td><a href="/pessoas/distribuicao_sexo/${key}">${key}</a></td> 
-        <td>${dist[key]}</td>
+        <td><a href="/pessoas/distribuicao_sexo/${elem[0]}">${elem[0]}</a></td> 
+        <td>${elem[1]}</td>
         </tr>
     `;
   }
 
   htmlpage += `
             </table>
+            <p><a href="/">Voltar atrás</a></p>
             </div>
-            <footer class="w3-container w3-blue">
+            <footer class="w3-container w3-purple">
         <adress>Generated in EngWeb2023 ${d}</adress>
     </footer>
     </div>
@@ -157,6 +172,8 @@ exports.genDitributionSportspage = function (data, d) {
       }
     }
   }
+  var list = Object.entries(dist).sort(([, a], [, b]) => b - a);
+
   var htmlpage = `
         <!DOCTYPE html>  
         <html>
@@ -179,19 +196,20 @@ exports.genDitributionSportspage = function (data, d) {
                 </tr>
     `;
 
-  for (const key of Object.keys(dist)) {
+  for (const elem of list) {
     htmlpage += `
         <tr>
-        <td><a href="/pessoas/distribuicao_desporto/${key}">${key}</a></td> 
-        <td>${dist[key]}</td>
+        <td><a href="/pessoas/distribuicao_desporto/${elem[0]}">${elem[0]}</a></td> 
+        <td>${elem[1]}</td>
         </tr>
     `;
   }
 
   htmlpage += `
             </table>
+            <p><a href="/">Voltar atrás</a></p>
             </div>
-            <footer class="w3-container w3-blue">
+            <footer class="w3-container w3-purple">
         <adress>Generated in EngWeb2023 ${d}</adress>
     </footer>
     </div>
@@ -248,8 +266,9 @@ exports.genDitributiontop10_profissoes = function (data, d) {
 
   htmlpage += `
             </table>
+            <p><a href="/">Voltar atrás</a></p>
             </div>
-            <footer class="w3-container w3-blue">
+            <footer class="w3-container w3-purple">
         <adress>Generated in EngWeb2023 ${d}</adress>
     </footer>
     </div>
@@ -257,4 +276,36 @@ exports.genDitributiontop10_profissoes = function (data, d) {
         </html>
     `;
   return htmlpage;
+};
+
+exports.genMenu = function () {
+  pagHTML = `
+  <!DOCTYPE html>
+<html>
+    <head>
+        <title>About People..</title>
+        <meta charset = "utf-8"/>
+        <link rel="stylesheet" type="text/css" href="w3.css"/>
+    </head>
+    <body>
+    <header class="w3-container w3-purple">
+                <h1> Menu Principal</h1>
+            </header>
+       <div class="w3-ul w3-Indigo">
+        <ul>
+        <li><h1><a href="/pessoas">Listar todas as pessoas </a></h1></li>
+        <li><h1><a href="/pessoasOrdenadas">Listar todas as pessoas ordenadas alfabeticamente </a></h1></li>
+        <li><h1><a href="/pessoas/distribuicao_sexo">Distribuição de pessoas por sexo </a></h1></li>
+        <li><h1><a href="/pessoas/distribuicao_desporto">Distribuição de pessoas por desporto </a></h1></li>
+        <li><h1><a href="/pessoas/top10_profissoes">Top 10 de profissões</a></h1></li>
+        </ul>
+      </div>
+      <footer class="w3-container w3-purple">
+        <adress>Generated in EngWeb2023 </adress>
+    </footer>
+        </body>
+    </html>
+  
+  `;
+  return pagHTML;
 };

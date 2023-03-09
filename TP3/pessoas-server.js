@@ -7,7 +7,11 @@ var myServer = http.createServer(function (req, res) {
   var d = new Date().toISOString().substring(0, 16);
   //GET  // Post --enviar info para servidor // Put-- alteração de dados no servidor
   console.log(req.method + " " + req.url + " " + d);
-  if (req.url == "/pessoas") {
+  if (req.url == "/") {
+    res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
+    res.write(mypages.genMenu());
+    res.end();
+  } else if (req.url == "/pessoas") {
     axios
       .get("http://localhost:3000/pessoas")
       .then(function (resp) {
@@ -65,6 +69,7 @@ var myServer = http.createServer(function (req, res) {
       .get("http://localhost:3000/pessoas")
       .then(function (resp) {
         var pessoas = resp.data;
+
         res.writeHead(200, { "Content-Type": "text/html;charset=utf-8" });
         res.write(mypages.genDitributionSexpage(pessoas, d));
         res.end();
@@ -168,13 +173,3 @@ var myServer = http.createServer(function (req, res) {
 
 myServer.listen(7777);
 console.log("Servidor à escuta na porta 7777");
-
-///tpc
-
-//quando o pedido for localhost:7777/
-
-//lista de pessoas
-//lista de pessoas ordenadas
-//distribuição por sexo
-//distribuição por desporto
-//top 10 de profissoes
