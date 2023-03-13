@@ -1,0 +1,1 @@
+var static = require("./static.js");
