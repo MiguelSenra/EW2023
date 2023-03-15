@@ -1,0 +1,26 @@
+extends layout
+
+block content
+    html
+      head
+        title Aluno: #{a.Id}
+        meta(charset="utf-8")
+        link(rel="icon" href="favicon.png")
+        link(rel="stylesheet" href="w3.css")
+      body
+        h1 #{JSON.stringify(a)}
+        .w3-card-4
+          header.w3-container.w3-teal
+            h1 Aluno: #{a.id}
+          .w3-container
+            ul.w3-ul.w3-card-4(style="width:50%")
+              li
+               b Nome: #{a.nome}
+              li
+                b Número: #{a.id} 
+              li
+                b Git (link): #[a(href="#{a.gitlink}")=a.gitlink]  
+                 
+          footer.w3-container.w3-teal
+            address Gerado por aluno::RPCW2022 em #{d} - #[a(href="/") Voltar] 
+             
