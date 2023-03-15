@@ -1,40 +1,39 @@
 {
   "tasks": [
     {
-      "id": "TPC4 EW",
-      "data_limite": "Sexta Feira",
-      "descrição": "Trabalho de casa nº4 da unidade curricular de Engenharia Web",
-      "done": 1
-    },
-    {
-      "data_limite": "3443-03-12",
-      "descrição": "ei la",
-      "id": "iuuQ7TS",
-      "done": 1
-    },
-    {
-      "data_limite": "3443-03-12",
-      "descrição": "ei la",
-      "id": "ZL40Uze",
-      "done": 1
-    },
-    {
       "id": "TrabalhoCG",
       "data_limite": "2023-04-30",
       "descrição": "trabalho cg",
+      "executor": "a95689",
       "done": 1
     },
     {
       "id": "Trabalho_ADI",
       "data_limite": "2023-03-28",
       "descrição": "Trabalho de ADI",
-      "executor": "a95689"
+      "executor": "a95689",
+      "done": 1
     },
     {
       "id": "Trabalho_CG",
       "data_limite": "2023-04-25",
       "descrição": "Trabalho CG",
-      "executor": "a97496"
+      "executor": "a95689",
+      "done": 0
+    },
+    {
+      "id": "TPC5_PL",
+      "data_limite": "2023-03-20",
+      "descrição": "Exercíco da cabine telefónica",
+      "executor": "a97496",
+      "done": 0
+    },
+    {
+      "id": "TPC4_EW",
+      "data_limite": "2023-03-17",
+      "descrição": "Este site",
+      "executor": "a97496",
+      "done": 1
     }
   ],
   "users": [
@@ -45,6 +44,10 @@
     {
       "id": "a95689",
       "nome": "Andre Mota"
+    },
+    {
+      "id": "a95432",
+      "nome": "José Alves"
     }
   ]
 }

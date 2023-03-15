@@ -9,6 +9,7 @@ var static = require("./static.js");
 const { parse } = require("querystring");
 
 // Aux functions
+
 function collectRequestBodyData(request, callback) {
   if (request.headers["content-type"] === "application/x-www-form-urlencoded") {
     let body = "";
@@ -64,7 +65,7 @@ var tasks_Server = http.createServer(function (req, res) {
                   res.writeHead(200, {
                     "Content-Type": "text/html;charset=utf-8",
                   });
-                  res.write(templates.PostTasksPage(users, tasks, d));
+                  res.write(templates.PostTasksPage(0, 0, users, tasks, d));
                   res.end();
                 })
                 .catch(function (erro) {
@@ -83,7 +84,7 @@ var tasks_Server = http.createServer(function (req, res) {
               );
               res.end();
             });
-        } else if (/\/tasks\/[a-z A-Z0-9]+$/i.test(req.url)) {
+        } else if (/\/tasks\/[a-z A-Z_0-9]+$/i.test(req.url)) {
           var idtask = req.url.split("/")[2];
           axios
             .get("http://localhost:3000/tasks")
@@ -118,7 +119,7 @@ var tasks_Server = http.createServer(function (req, res) {
               );
               res.end();
             });
-        } else if (/\/tasks\/done\/[a-zA-Z0-9]+$/i.test(req.url)) {
+        } else if (/\/tasks\/done\/[a-z A-Z_0-9]+$/i.test(req.url)) {
           var idtask = req.url.split("/")[3];
           axios
             .get("http://localhost:3000/tasks/" + idtask)
@@ -136,7 +137,7 @@ var tasks_Server = http.createServer(function (req, res) {
                     "<p>Registo alterado:" +
                       JSON.stringify(resp.data) +
                       "</p>" +
-                      "<a href=" / "> Voltar ao Menu </a>"
+                      `<p><a href="/tasks"> Voltar ao Menu </a></p>`
                   );
                 })
                 .catch((error) => {
@@ -154,18 +155,18 @@ var tasks_Server = http.createServer(function (req, res) {
                 templates.errorPage("Unable to collect record: " + idAluno, d)
               );
             });
-        } else if (/\/tasks\/delete\/[a-zA-Z0-9]+$/i.test(req.url)) {
-          var idAluno = req.url.split("/")[3];
+        } else if (/\/tasks\/delete\/[a-z A-Z_0-9]+$/i.test(req.url)) {
+          var idTask = req.url.split("/")[3];
           axios
-            .delete("http://localhost:3000/alunos/" + idAluno)
+            .delete("http://localhost:3000/tasks/" + idTask)
             .then((resp) => {
-              console.log("Delete " + idAluno + " :: " + resp.status);
+              console.log("Delete " + idTask + " :: " + resp.status);
               res.writeHead(201, { "Content-Type": "text/html;charset=utf-8" });
               res.end(
                 "<p>Registo apagado:" +
-                  idAluno +
+                  idTask +
                   "</p>" +
-                  "<a href=" / "> Voltar ao Menu </a>"
+                  `<p><a href="/tasks"> Voltar ao Menu </a></p>`
               );
             })
             .catch((error) => {
@@ -174,6 +175,40 @@ var tasks_Server = http.createServer(function (req, res) {
               res.end(
                 templates.errorPage("Unable to delete record: " + idAluno, d)
               );
+            });
+        } else if (/\/tasks\/edit\/[a-z A-Z_0-9]+$/i.test(req.url)) {
+          var idTask = req.url.split("/")[3];
+          axios
+            .get("http://localhost:3000/tasks")
+            .then((response) => {
+              var tasks = response.data;
+              axios
+                .get("http://localhost:3000/users/")
+                .then((response) => {
+                  var users = response.data;
+                  res.writeHead(200, {
+                    "Content-Type": "text/html;charset=utf-8",
+                  });
+                  res.write(
+                    templates.PostTasksPage(1, idTask, users, tasks, d)
+                  );
+                  res.end();
+                })
+                .catch(function (erro) {
+                  res.writeHead(200, {
+                    "Content-Type": "text/html;charset=utf-8",
+                  });
+                  res.write(`<p> TASKS ERROR JSON-SERVER! ... Erro:   ` + erro);
+                  res.end();
+                });
+            })
+            .catch(function (erro) {
+              res.writeHead(404, { "Content-Type": "text/html;charset=utf-8" });
+              res.write(
+                "<p>Não foi possível abrir o formulário de registo de novas tarefas... Erro: " +
+                  erro
+              );
+              res.end();
             });
         } else {
           res.writeHead(200, { "Content-Type": "text/html;charset=utf-8" });
@@ -204,7 +239,7 @@ var tasks_Server = http.createServer(function (req, res) {
                     "<p>Registo inserido:" +
                       JSON.stringify(resp.data) +
                       "</p>" +
-                      "<a href=" / "> Voltar ao Menu </a>"
+                      `<p><a href="/tasks"> Voltar ao Menu </a></p>`
                   );
                 })
                 .catch((error) => {
@@ -236,7 +271,7 @@ var tasks_Server = http.createServer(function (req, res) {
                     "<p>Registo inserido:" +
                       JSON.stringify(resp.data) +
                       "</p>" +
-                      "<a href=" / "> Voltar ao Menu </a>"
+                      `<p><a href="/tasks"> Voltar ao Menu </a></p>`
                   );
                 })
                 .catch((error) => {
@@ -253,23 +288,22 @@ var tasks_Server = http.createServer(function (req, res) {
               res.end();
             }
           });
-        } else if (/\/alunos\/edit\/(A|PG)[0-9]+$/i.test(req.url)) {
+        } else if (/\/tasks\/edit\/[a-z A-Z_0-9]+$/i.test(req.url)) {
           collectRequestBodyData(req, (result) => {
             if (result) {
               console.dir(result);
               axios
-                .put("http://localhost:3000/alunos/" + result.id, result)
+                .put("http://localhost:3000/tasks/" + result.id, result)
                 .then((resp) => {
                   console.log(resp.data);
                   res.writeHead(200, {
                     "Content-Type": "text/html;charset=utf-8",
                   });
-                  // res.write(studentFormPage(d))
                   res.end(
                     "<p>Registo alterado:" +
                       JSON.stringify(resp.data) +
                       "</p>" +
-                      "<a href=" / "> Voltar ao Menu </a>"
+                      `<p><a href="/tasks"> Voltar ao Menu </a></p>`
                   );
                 })
                 .catch((error) => {
@@ -283,7 +317,7 @@ var tasks_Server = http.createServer(function (req, res) {
               res.writeHead(201, { "Content-Type": "text/html;charset=utf-8" });
               res.write(
                 "<p>Unable to collect data from body...</p>" +
-                  "<a href=" / "> Voltar ao Menu </a>"
+                `<p><a href="/tasks"> Voltar ao Menu </a></p>`
               );
               res.end();
             }
@@ -291,7 +325,7 @@ var tasks_Server = http.createServer(function (req, res) {
         } else {
           res.writeHead(200, { "Content-Type": "text/html;charset=utf-8" });
           res.write("<p>Unsupported POST request: " + req.url + "</p>");
-          res.write('<p>"<a href="/"> Voltar ao Menu </a>"</p>');
+          res.write(`<p><a href="/tasks"> Voltar ao Menu </a></p>`);
           res.end();
         }
         break;
