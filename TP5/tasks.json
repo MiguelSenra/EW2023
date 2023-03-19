@@ -1,0 +1,77 @@
+{
+  "tasks": [
+    {
+      "id": "TrabalhoCG",
+      "data_limite": "2023-04-30",
+      "descrição": "trabalho cg",
+      "executor": "a95689",
+      "done": 1
+    },
+    {
+      "id": "Trabalho_ADI",
+      "data_limite": "2023-03-28",
+      "descrição": "Trabalho de ADI",
+      "executor": "a95689",
+      "done": 1
+    },
+    {
+      "id": "Trabalho_CG",
+      "data_limite": "2023-04-25",
+      "descrição": "Trabalho CG",
+      "executor": "a95689",
+      "done": 0
+    },
+    {
+      "id": "TPC5_PL",
+      "data_limite": "2023-03-20",
+      "descrição": "Exercíco da cabine telefónica (completar)",
+      "executor": "a97496",
+      "done": 1
+    },
+    {
+      "id": "TPC4_EW",
+      "data_limite": "2023-03-17",
+      "descrição": "Este site",
+      "executor": "a97496",
+      "done": 1
+    },
+    {
+      "id": "Teste de DFísica",
+      "data_limite": "2023-03-21",
+      "descrição": "Teste de Física",
+      "executor": "a95689"
+    },
+    {
+      "id": "Trabalho de PL",
+      "data_limite": "2023-05-05",
+      "descrição": "Trabalho",
+      "executor": "a97496"
+    }
+  ],
+  "users": [
+    {
+      "id": "a97496",
+      "nome": "Miguel Senra"
+    },
+    {
+      "id": "a95689",
+      "nome": "Andre Mota"
+    },
+    {
+      "id": "a95432",
+      "nome": "José Alves"
+    },
+    {
+      "id": "a98765",
+      "nome": "João Silva"
+    },
+    {
+      "id": "a24034",
+      "nome": "Vitor Senra"
+    },
+    {
+      "id": "a12345",
+      "nome": "Joel Lopes"
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+extends layout 
+block content
+
+  html
+    head
+      meta(charset="UTF-8") 
+      link(rel="icon" href="favicon.png") 
+      link(rel="stylesheet" href="/stylesheets/w3.css") 
+      title Tasks Management
+    body  
+      table.w3-table-all
+        tr
+          th Tarefas Não Realizadas
+          th Data Limite
+          th Concluir Tarefa
+          th Tarefas Realizadas
+          th Eliminar Tarefa
+        - var i=0
+        while i<max
+          tr
+            if i < lista_not_done.length
+              td 
+                a(href="/tasks/"+lista_not_done[i]["id"]) #{lista_not_done[i]["id"]}
+              td=lista_not_done[i]["data_limite"]
+              td
+                a(href="/tasks/done/"+lista_not_done[i]["id"])
+                  button.w3-btn.w3-light-blue.w3-mb-2.w3-round.w3-margin-left(type="submit") Done
+                a(href="/tasks/edit/"+lista_not_done[i]["id"])
+                  button.w3-btn.w3-light-blue.w3-mb-2.w3-round.w3-margin-left.w3-margin-right(type="submit") Edit
+                a(href="/tasks/delete/"+lista_not_done[i]["id"])
+                  button.w3-btn.w3-light-blue.w3-mb-2.w3-round.w3-margin-right(type="submit") Delete
+            else 
+              td 
+              td
+              td
+            if i < lista_done.length
+              td 
+                a(href="/tasks/"+lista_done[i]["id"])=lista_done[i]["id"]
+              td
+                a(href="/tasks/delete/"+lista_done[i]["id"])
+                  button.w3-btn.w3-light-blue.w3-mb-2.w3-round(type="submit") Delete
+            else 
+              td
+              td
+          - ++i
