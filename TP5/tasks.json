@@ -17,9 +17,8 @@
     {
       "id": "Trabalho_CG",
       "data_limite": "2023-04-25",
-      "descrição": "Trabalho CG",
-      "executor": "a95689",
-      "done": 0
+      "descrição": "Trabalho CG FASE 2",
+      "executor": "a95689"
     },
     {
       "id": "TPC5_PL",
@@ -38,14 +37,15 @@
     {
       "id": "Teste de DFísica",
       "data_limite": "2023-03-21",
-      "descrição": "Teste de Física",
+      "descrição": "Teste de Física e Química",
       "executor": "a95689"
     },
     {
-      "id": "Trabalho de PL",
-      "data_limite": "2023-05-05",
-      "descrição": "Trabalho",
-      "executor": "a97496"
+      "id": "TPC6_PL",
+      "data_limite": "2023-03-26",
+      "descrição": "TPC",
+      "executor": "a24034",
+      "done": 1
     }
   ],
   "users": [
@@ -72,6 +72,10 @@
     {
       "id": "a12345",
       "nome": "Joel Lopes"
+    },
+    {
+      "id": "A12346",
+      "nome": "Hugo Senra"
     }
   ]
 }
